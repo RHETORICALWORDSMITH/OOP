@@ -12,7 +12,7 @@ public class LibraryManagementSystem {
 
     public LibraryManagementSystem() {
         library = new Library(); // Instantiate the concrete Library class
-        ((Library) library).loadBooksFromFile(FILE_NAME); // Load books from file
+        (library).loadBooksFromFile(FILE_NAME); // Load books from file
         initialize();
     }
 
