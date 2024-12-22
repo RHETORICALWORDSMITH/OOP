@@ -7,7 +7,7 @@ public class LibraryManagementSystem {
     private JFrame frame;
     private JTable bookTable;
     private DefaultTableModel tableModel;
-    private LibraryOperations library; // Use the abstract class
+    private Library library;
     private final String FILE_NAME = "books.txt";
 
     public LibraryManagementSystem() {
