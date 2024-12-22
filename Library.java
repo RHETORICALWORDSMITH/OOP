@@ -9,6 +9,16 @@ public class Library extends LibraryOperations {
         books.add(new Book(title, author, isbn, "Available"));
     }
 
+    @Override
+    public void deleteBook(String isbn) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getIsbn().equals(isbn)) {
+                books.remove(i);
+                return;
+            }
+        }
+    }
+
     // Issue a book (change status to 'Issued')
     @Override
     public void issueBook(String isbn) {
@@ -57,11 +67,11 @@ public class Library extends LibraryOperations {
         } catch (IOException e) {
             // Handle IO exceptions, such as file not found or read error
             System.out.println("Error reading from file. The file might not exist or there was an issue accessing it.");
-            e.printStackTrace(); // Optionally print stack trace for debugging
+            e.printStackTrace(); // print stack trace for debugging
         } catch (ClassNotFoundException e) {
             // Handle the case where the Book class is not found during deserialization
             System.out.println("Error deserializing data: The Book class was not found.");
-            e.printStackTrace(); // Optionally print stack trace for debugging
+            e.printStackTrace(); // print stack trace for debugging
         }
     }
 

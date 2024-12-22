@@ -12,6 +12,8 @@ public abstract class LibraryOperations {
     // Abstract methods for operations
     public abstract void addBook(String title, String author, String isbn);
 
+    public abstract void deleteBook(String isbn);
+
     public abstract void issueBook(String isbn);
 
     public abstract void returnBook(String isbn);

@@ -36,14 +36,16 @@ public class LibraryManagementSystem {
         JButton issueButton = new JButton("Issue Book");
         JButton returnButton = new JButton("Return Book");
         JButton saveButton = new JButton("Save and Exit");
-
+        JButton deleteButton = new JButton("Delete Book");
         buttonPanel.add(addButton);
+        buttonPanel.add(deleteButton);
         buttonPanel.add(issueButton);
         buttonPanel.add(returnButton);
         buttonPanel.add(saveButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         addButton.addActionListener(e -> addBookDialog());
+        deleteButton.addActionListener(e -> deleteBookDialog());
         issueButton.addActionListener(e -> issueBookDialog());
         returnButton.addActionListener(e -> returnBookDialog());
         saveButton.addActionListener(e -> saveAndExit());
@@ -92,6 +94,14 @@ public class LibraryManagementSystem {
             } else {
                 JOptionPane.showMessageDialog(frame, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        }
+    }
+
+    private void deleteBookDialog() {
+        String isbn = JOptionPane.showInputDialog(frame, "Enter ISBN of the book to delete:");
+        if (isbn != null && !isbn.isEmpty()) {
+            library.deleteBook(isbn); // Use the deleteBook method from the Library class
+            refreshTable();
         }
     }
 
