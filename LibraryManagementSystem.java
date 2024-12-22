@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.IOException;
 
 public class LibraryManagementSystem {
     private JFrame frame;
@@ -66,13 +65,8 @@ public class LibraryManagementSystem {
     }
 
     private void saveAndExit() {
-        try {
-            library.saveBooksToFile(FILE_NAME); // Save books
-            System.exit(0); // Exit if save is successful
-        } catch (IOException e) {
-            // Show error message in case of failure
-            JOptionPane.showMessageDialog(frame, "Error saving data!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        library.saveBooksToFile(FILE_NAME); // Save books
+        System.exit(0); // Exit if save is successful
     }
 
     private void refreshTable() {
@@ -95,11 +89,11 @@ public class LibraryManagementSystem {
                 "ISBN:", isbnField
         };
 
-        // returns a different int calue for OK and cancel and is stored in option
+        // returns a different int value for OK and cancel and it is stored in option
         // variable
         int option = JOptionPane.showConfirmDialog(frame, message, "Add Book", JOptionPane.OK_CANCEL_OPTION);
 
-        // if int value of option matches int value of ok then user pressed ok
+        // if value of option is the same as value of ok then user clicked ok
         if (option == JOptionPane.OK_OPTION) {
             String title = titleField.getText();
             String author = authorField.getText();

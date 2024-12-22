@@ -43,9 +43,12 @@ public class Library extends LibraryOperations {
     }
 
     // Save the list of books to a file
-    public void saveBooksToFile(String fileName) throws IOException {
+    public void saveBooksToFile(String fileName) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            oos.writeObject(books);
+            oos.writeObject(books); // Write the books to the file
+        } catch (IOException e) {
+            // Handle the exception manually here
+            System.err.println("Error saving the books to file: " + e.getMessage());
         }
     }
 
