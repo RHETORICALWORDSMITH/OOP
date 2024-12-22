@@ -21,17 +21,25 @@ public class LibraryManagementSystem {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
 
+        // sub container(div1)
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         String[] columnNames = { "Title", "Author", "ISBN", "Status" };
+        // makes the model of the tabel i.e column, rows
         tableModel = new DefaultTableModel(columnNames, 0);
+        // dislays the tabel using JTable
         bookTable = new JTable(tableModel);
         refreshTable();
 
+        // adds scroll bars if the content is overflowing
         JScrollPane scrollPane = new JScrollPane(bookTable);
+
+        // adding elements in mainpanel(div1)
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
+        // another sub container (div2)
         JPanel buttonPanel = new JPanel();
+
         JButton addButton = new JButton("Add Book");
         JButton issueButton = new JButton("Issue Book");
         JButton returnButton = new JButton("Return Book");
@@ -42,6 +50,8 @@ public class LibraryManagementSystem {
         buttonPanel.add(issueButton);
         buttonPanel.add(returnButton);
         buttonPanel.add(saveButton);
+
+        // adding (div2) in main body
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         addButton.addActionListener(e -> addBookDialog());
@@ -50,6 +60,7 @@ public class LibraryManagementSystem {
         returnButton.addActionListener(e -> returnBookDialog());
         saveButton.addActionListener(e -> saveAndExit());
 
+        // now adds the main subconstainer to the Jframe default pane
         frame.add(mainPanel);
         frame.setVisible(true);
     }
@@ -65,6 +76,8 @@ public class LibraryManagementSystem {
     }
 
     private void refreshTable() {
+        // clears previous existing rows if this is not done then they will also be
+        // added again if a new book is added
         tableModel.setRowCount(0);
         for (Book book : library.getBooks()) {
             tableModel.addRow(new Object[] { book.getTitle(), book.getAuthor(), book.getIsbn(), book.getStatus() });
@@ -82,7 +95,11 @@ public class LibraryManagementSystem {
                 "ISBN:", isbnField
         };
 
+        // returns a different int calue for OK and cancel and is stored in option
+        // variable
         int option = JOptionPane.showConfirmDialog(frame, message, "Add Book", JOptionPane.OK_CANCEL_OPTION);
+
+        // if int value of option matches int value of ok then user pressed ok
         if (option == JOptionPane.OK_OPTION) {
             String title = titleField.getText();
             String author = authorField.getText();
@@ -122,6 +139,13 @@ public class LibraryManagementSystem {
     }
 
     public static void main(String[] args) {
+        // Swing has a rule that UI updates should only happen on the Event Dispatch
+        // Thread (EDT). If we don't follow this rule, the program can behave strangely.
+        // SwingUtilities.invokeLater() is a method that schedules a Runnable to be
+        // executed on the Event Dispatch Thread (EDT).
+        // Asynchronous Execution: By using invokeLater(), you allow the main thread to
+        // continue its execution without being blocked while waiting for the Swing
+        // components to be created or updated.
         SwingUtilities.invokeLater(LibraryManagementSystem::new);
     }
 }
